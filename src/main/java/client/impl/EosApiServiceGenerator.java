@@ -5,6 +5,7 @@ import client.exception.EosApiErrorCode;
 import client.exception.EosApiException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -24,7 +25,21 @@ public class EosApiServiceGenerator {
     static {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(chain -> {
+            Request original = chain.request();
+            String host = original.url().host();
+            int port = original.url().port();
+            if (port > 0) {
+                host = host + ":" + port;
+            }
+            Request request = original.newBuilder()
+                    .header("Host", host)
+                    .build();
+
+            return chain.proceed(request);
+        }).addInterceptor(interceptor).build();
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.disable(FAIL_ON_UNKNOWN_PROPERTIES);
