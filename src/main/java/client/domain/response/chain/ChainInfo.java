@@ -1,8 +1,12 @@
 package client.domain.response.chain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+
+import java.math.BigInteger;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ChainInfo {
@@ -11,25 +15,25 @@ public class ChainInfo {
 
     private String chainId;
 
-    private String headBlockNum;
+    private BigInteger headBlockNum;
 
-    private String lastIrreversibleBlockNum;
+    private BigInteger lastIrreversibleBlockNum;
 
     private String lastIrreversibleBlockId;
 
     private String headBlockId;
 
-    private String headBlockTime;
+    private Date headBlockTime;
 
     private String headBlockProducer;
 
-    private String virtualBlockCpuLimit;
+    private BigInteger virtualBlockCpuLimit;
 
-    private String virtualBlockNetLimit;
+    private BigInteger virtualBlockNetLimit;
 
-    private String blockCpuLimit;
+    private BigInteger blockCpuLimit;
 
-    private String blockNetLimit;
+    private BigInteger blockNetLimit;
 
     public ChainInfo() {
 
@@ -58,21 +62,21 @@ public class ChainInfo {
         this.chainId = chainId;
     }
 
-    public String getHeadBlockNum() {
+    public BigInteger getHeadBlockNum() {
         return headBlockNum;
     }
 
     @JsonProperty("head_block_num")
-    public void setHeadBlockNum(String headBlockNum) {
+    public void setHeadBlockNum(BigInteger headBlockNum) {
         this.headBlockNum = headBlockNum;
     }
 
-    public String getLastIrreversibleBlockNum() {
+    public BigInteger getLastIrreversibleBlockNum() {
         return lastIrreversibleBlockNum;
     }
 
     @JsonProperty("last_irreversible_block_num")
-    public void setLastIrreversibleBlockNum(String lastIrreversibleBlockNum) {
+    public void setLastIrreversibleBlockNum(BigInteger lastIrreversibleBlockNum) {
         this.lastIrreversibleBlockNum = lastIrreversibleBlockNum;
     }
 
@@ -94,12 +98,13 @@ public class ChainInfo {
         this.headBlockId = headBlockId;
     }
 
-    public String getHeadBlockTime() {
+    public Date getHeadBlockTime() {
         return headBlockTime;
     }
 
     @JsonProperty("head_block_time")
-    public void setHeadBlockTime(String headBlockTime) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    public void setHeadBlockTime(Date headBlockTime) {
         this.headBlockTime = headBlockTime;
     }
 
@@ -112,39 +117,39 @@ public class ChainInfo {
         this.headBlockProducer = headBlockProducer;
     }
 
-    public String getVirtualBlockCpuLimit() {
+    public BigInteger getVirtualBlockCpuLimit() {
         return virtualBlockCpuLimit;
     }
 
     @JsonProperty("virtual_block_cpu_limit")
-    public void setVirtualBlockCpuLimit(String virtualBlockCpuLimit) {
+    public void setVirtualBlockCpuLimit(BigInteger virtualBlockCpuLimit) {
         this.virtualBlockCpuLimit = virtualBlockCpuLimit;
     }
 
-    public String getVirtualBlockNetLimit() {
+    public BigInteger getVirtualBlockNetLimit() {
         return virtualBlockNetLimit;
     }
 
     @JsonProperty("virtual_block_net_limit")
-    public void setVirtualBlockNetLimit(String virtualBlockNetLimit) {
+    public void setVirtualBlockNetLimit(BigInteger virtualBlockNetLimit) {
         this.virtualBlockNetLimit = virtualBlockNetLimit;
     }
 
-    public String getBlockCpuLimit() {
+    public BigInteger getBlockCpuLimit() {
         return blockCpuLimit;
     }
 
     @JsonProperty("block_cpu_limit")
-    public void setBlockCpuLimit(String blockCpuLimit) {
+    public void setBlockCpuLimit(BigInteger blockCpuLimit) {
         this.blockCpuLimit = blockCpuLimit;
     }
 
-    public String getNetCpuLimit() {
+    public BigInteger getNetCpuLimit() {
         return blockNetLimit;
     }
 
     @JsonProperty("block_net_limit")
-    public void setBlockNetLimit(String blockNetLimit) {
+    public void setBlockNetLimit(BigInteger blockNetLimit) {
         this.blockNetLimit = blockNetLimit;
     }
 }
