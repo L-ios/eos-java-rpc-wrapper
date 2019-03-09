@@ -1,17 +1,21 @@
 package client.domain.response.chain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import client.domain.response.chain.block.NewProducers;
 import client.domain.response.history.transaction.Transaction;
 
+import java.math.BigInteger;
+import java.util.Date;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Block {
 
     private String previous;
 
-    private String timeStamp;
+    private Date timeStamp;
 
     private String transactionMerkleRoot;
 
@@ -21,7 +25,7 @@ public class Block {
 
     private String producer;
 
-    private String scheduleVersion;
+    private BigInteger scheduleVersion;
 
     private NewProducers newProducers;
 
@@ -29,9 +33,9 @@ public class Block {
 
     private String id;
 
-    private Long blockNum;
+    private BigInteger blockNum;
 
-    private Long refBlockPrefix;
+    private BigInteger refBlockPrefix;
 
     private Boolean confirmed;
 
@@ -71,12 +75,13 @@ public class Block {
         this.previous = previous;
     }
 
-    public String getTimeStamp() {
+    public Date getTimeStamp() {
         return timeStamp;
     }
 
     @JsonProperty("timestamp")
-    public void setTimeStamp(String timeStamp) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    public void setTimeStamp(Date timeStamp) {
         this.timeStamp = timeStamp;
     }
 
@@ -117,21 +122,21 @@ public class Block {
         this.id = id;
     }
 
-    public Long getBlockNum() {
+    public BigInteger getBlockNum() {
         return blockNum;
     }
 
     @JsonProperty("block_num")
-    public void setBlockNum(Long blockNum) {
+    public void setBlockNum(BigInteger blockNum) {
         this.blockNum = blockNum;
     }
 
-    public Long getRefBlockPrefix() {
+    public BigInteger getRefBlockPrefix() {
         return refBlockPrefix;
     }
 
     @JsonProperty("ref_block_prefix")
-    public void setRefBlockPrefix(Long refBlockPrefix) {
+    public void setRefBlockPrefix(BigInteger refBlockPrefix) {
         this.refBlockPrefix = refBlockPrefix;
     }
 
@@ -144,12 +149,12 @@ public class Block {
         this.newProducers = newProducers;
     }
 
-    public String getScheduleVersion() {
+    public BigInteger getScheduleVersion() {
         return scheduleVersion;
     }
 
     @JsonProperty("schedule_version")
-    public void setScheduleVersion(String scheduleVersion) {
+    public void setScheduleVersion(BigInteger scheduleVersion) {
         this.scheduleVersion = scheduleVersion;
     }
 

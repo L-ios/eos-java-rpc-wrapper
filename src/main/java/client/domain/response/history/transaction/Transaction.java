@@ -1,10 +1,13 @@
 package client.domain.response.history.transaction;
 
-import java.util.List;
-
 import client.domain.common.ActionTrace;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Transaction {
@@ -13,19 +16,19 @@ public class Transaction {
 
     private Object trx;
 
-    private String blockTime;
+    private Date blockTime;
 
-    private Integer blockNum;
+    private BigInteger blockNum;
 
-    private Integer lastIrreversibleBlock;
+    private BigInteger lastIrreversibleBlock;
 
     private List<ActionTrace> traces = null;
 
     private String status;
 
-    private String cpuUsageUs;
+    private BigInteger cpuUsage;
 
-    private String netUsageWords;
+    private BigInteger netUsage;
 
     public String getId() {
         return id;
@@ -45,30 +48,31 @@ public class Transaction {
         this.trx = trx;
     }
 
-    public String getBlockTime() {
+    public Date getBlockTime() {
         return blockTime;
     }
 
     @JsonProperty("block_time")
-    public void setBlockTime(String blockTime) {
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    public void setBlockTime(Date blockTime) {
         this.blockTime = blockTime;
     }
 
-    public Integer getBlockNum() {
+    public BigInteger getBlockNum() {
         return blockNum;
     }
 
     @JsonProperty("block_num")
-    public void setBlockNum(Integer blockNum) {
+    public void setBlockNum(BigInteger blockNum) {
         this.blockNum = blockNum;
     }
 
-    public Integer getLastIrreversibleBlock() {
+    public BigInteger getLastIrreversibleBlock() {
         return lastIrreversibleBlock;
     }
 
     @JsonProperty("last_irreversible_block")
-    public void setLastIrreversibleBlock(Integer lastIrreversibleBlock) {
+    public void setLastIrreversibleBlock(BigInteger lastIrreversibleBlock) {
         this.lastIrreversibleBlock = lastIrreversibleBlock;
     }
 
@@ -89,21 +93,21 @@ public class Transaction {
         this.status = status;
     }
 
-    public String getCpuUsageUs() {
-        return cpuUsageUs;
+    public BigInteger getCpuUsage() {
+        return cpuUsage;
     }
 
-    @JsonProperty("cpu_usage_us")
-    public void setCpuUsageUs(String cpuUsageUs) {
-        this.cpuUsageUs = cpuUsageUs;
+    @JsonProperty("cpu_usage")
+    public void setCpuUsage(BigInteger cpuUsage) {
+        this.cpuUsage = cpuUsage;
     }
 
-    public String getNetUsageWords() {
-        return netUsageWords;
+    public BigInteger getNetUsage() {
+        return netUsage;
     }
 
-    @JsonProperty("net_usage_words")
-    public void setNetUsageWords(String netUsageWords) {
-        this.netUsageWords = netUsageWords;
+    @JsonProperty("net_usage")
+    public void setNetUsage(BigInteger netUsage) {
+        this.netUsage = netUsage;
     }
 }
